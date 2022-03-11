@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for transaction in transactions %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ transaction.owner.username }}</a>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('expanses.expanse', transaction_id = transaction.id) }}">Name: {{ transaction.name }} Value:{{ transaction.value }}</a></h2>
+            <h2><a class="article-title" href="#">Category: {{ transaction.category }}  Date: {{ transaction.date.strftime('%Y-%m-%d') }}</a></h2>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

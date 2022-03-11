@@ -1,0 +1,6 @@
+{
+	"SECRET_KEY": "180c30b8829c9becb600530d9e8467f9s",
+	"SQLALCHEMY_DATABASE_URI": "sqlite:///data.db",
+	"MAIL_USERNAME": "jjdmdevelopment@gmail.com",
+    "MAIL_PASSWORD": "jjdmpass123"
+}
