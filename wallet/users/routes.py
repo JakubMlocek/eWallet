@@ -4,7 +4,7 @@ from wallet import db, bcrypt
 from wallet.database_connector import User, Transaction
 from wallet.users.forms import (RegistrationForm, LoginForm, UpdateAccount,
                                    RequestResetForm, ResetPasswordForm)
-from wallet.users.utils import save_picture, send_reset_email
+from wallet.users.utils import save_picture, send_reset_email, send_welcome_email
 
 users = Blueprint('users', __name__)
 
@@ -19,6 +19,8 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f'Account created for {form.username.data}! Just log in', 'success')
+        user = User.query.filter_by(email=form.email.data).first()
+        send_welcome_email(user)
         return redirect(url_for('main.index'))
     return render_template('register.html', title="Registration", form=form)
 
@@ -68,7 +70,7 @@ def reset_request():
         return redirect(url_for('expanses.expanses'))
     form = RequestResetForm()
     if form.validate_on_submit():
-        user = user.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
         flash("An email with reset instructions has been sent")
         return redirect(url_for('users.login'))
