@@ -10,4 +10,6 @@ User get's an welcome email after registration and can reset his password using 
 
 ![account](readme_images/resetpassword.png)  
 
+`Templates` and `Forms` are separated into Blueprints and code is a `Python Package`
+
 
